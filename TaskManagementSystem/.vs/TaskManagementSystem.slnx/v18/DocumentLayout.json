@@ -1,0 +1,114 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7BD0055B-4AAD-E775-F478-625EC62D13B8}|TaskManagement.Infrastructure\\TaskManagement.Infrastructure.csproj|e:\\10p\\task-management-tool\\taskmanagementsystem\\taskmanagement.infrastructure\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BD0055B-4AAD-E775-F478-625EC62D13B8}|TaskManagement.Infrastructure\\TaskManagement.Infrastructure.csproj|solutionrelative:taskmanagement.infrastructure\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2857DDF1-C783-E658-E035-3AE0E8575715}|TaskManagement.Application\\TaskManagement.Application.csproj|e:\\10p\\task-management-tool\\taskmanagementsystem\\taskmanagement.application\\interfaces\\persistence\\itaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2857DDF1-C783-E658-E035-3AE0E8575715}|TaskManagement.Application\\TaskManagement.Application.csproj|solutionrelative:taskmanagement.application\\interfaces\\persistence\\itaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B576B31-CCDE-4CDD-B7BE-179A3E244F59}|TaskManagement.Domain\\TaskManagement.Domain.csproj|e:\\10p\\task-management-tool\\taskmanagementsystem\\taskmanagement.domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B576B31-CCDE-4CDD-B7BE-179A3E244F59}|TaskManagement.Domain\\TaskManagement.Domain.csproj|solutionrelative:taskmanagement.domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B576B31-CCDE-4CDD-B7BE-179A3E244F59}|TaskManagement.Domain\\TaskManagement.Domain.csproj|e:\\10p\\task-management-tool\\taskmanagementsystem\\taskmanagement.domain\\taskitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B576B31-CCDE-4CDD-B7BE-179A3E244F59}|TaskManagement.Domain\\TaskManagement.Domain.csproj|solutionrelative:taskmanagement.domain\\taskitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 373,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Infrastructure\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "TaskManagement.Infrastructure\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Infrastructure\\ApplicationDbContext.cs",
+              "RelativeToolTip": "TaskManagement.Infrastructure\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T20:19:15.825Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ITaskService.cs",
+              "DocumentMoniker": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Application\\Interfaces\\Persistence\\ITaskService.cs",
+              "RelativeDocumentMoniker": "TaskManagement.Application\\Interfaces\\Persistence\\ITaskService.cs",
+              "ToolTip": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Application\\Interfaces\\Persistence\\ITaskService.cs",
+              "RelativeToolTip": "TaskManagement.Application\\Interfaces\\Persistence\\ITaskService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAqwA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T20:15:59.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Domain\\User.cs",
+              "RelativeDocumentMoniker": "TaskManagement.Domain\\User.cs",
+              "ToolTip": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Domain\\User.cs",
+              "RelativeToolTip": "TaskManagement.Domain\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T20:14:25.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TaskItem.cs",
+              "DocumentMoniker": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Domain\\TaskItem.cs",
+              "RelativeDocumentMoniker": "TaskManagement.Domain\\TaskItem.cs",
+              "ToolTip": "E:\\10P\\Task-Management-Tool\\TaskManagementSystem\\TaskManagement.Domain\\TaskItem.cs",
+              "RelativeToolTip": "TaskManagement.Domain\\TaskItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T20:12:40.299Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 27,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
