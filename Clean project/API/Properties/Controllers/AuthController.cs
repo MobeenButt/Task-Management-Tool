@@ -1,6 +1,8 @@
 ﻿using Application.Interfaces;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace API.Properties.Controllers
 {
@@ -41,12 +43,19 @@ namespace API.Properties.Controllers
             {
                 var token = _userService.Login(request.Username, request.Password);
 
-                // 
+                // decoding token
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+                var username = jwtToken.Claims.First(u => u.Type == ClaimTypes.Name).Value;
+                var role = jwtToken.Claims.First(r => r.Type == ClaimTypes.Role).Value;
+
 
                 return Ok(new
                 {
                     message = "User logged in successfully",
                     Token = token,
+                    username=username,
+                    role=role
                     
                 });
             }

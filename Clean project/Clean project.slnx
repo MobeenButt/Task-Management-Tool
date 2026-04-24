@@ -6,6 +6,7 @@
   <Folder Name="/src/Application/">
     <Project Path="Application/Application.csproj" />
   </Folder>
+  <Folder Name="/src/Application/DTOs/" />
   <Folder Name="/src/Domain/">
     <Project Path="Domain/Domain.csproj" />
   </Folder>
