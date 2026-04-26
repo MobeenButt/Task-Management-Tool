@@ -76,7 +76,19 @@ namespace Infrastructure.TaskServices
 
         TaskResponseDto ITaskService.GetById(int id, int userId)
         {
-            throw new NotImplementedException();
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == userId);
+            if (task == null)
+                throw new Exception("Task not found or access denied.");
+            return new TaskResponseDto
+            {
+                Id = task.Id,
+                Title = task.Title,
+                Description = task.Description,
+                Status = task.Status,
+                Priority = task.Priority,
+                DueDate = task.DueDate,
+                UserId = task.UserId
+            };
         }
 
         Dictionary<string, int> ITaskService.GetTaskCountByStatus(int? userId)
