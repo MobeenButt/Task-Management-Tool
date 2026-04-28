@@ -13,6 +13,7 @@ namespace Application.DTOs
         public string? Status { get; set; }
         public int Priority { get; set; }
         public DateTime DueDate { get; set; }
+        public string? Category { get; set; }
 
     }
     public class UpdateTaskDto
@@ -23,6 +24,7 @@ namespace Application.DTOs
         public string? Status { get; set; }
         public int Priority { get; set; }
         public DateTime DueDate { get; set; }
+        public string? Category { get; set; }
     }
     public class TaskResponseDto
     {
@@ -34,5 +36,6 @@ namespace Application.DTOs
         public DateTime DueDate { get; set; }
         public int UserId { get; set; }
         public string? Username { get; set; }
+        public string? Category { get; set; }
     }
 }

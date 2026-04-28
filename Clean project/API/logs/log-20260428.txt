@@ -1,0 +1,707 @@
+2026-04-28 23:03:10.590 +05:00 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-28 23:03:11.127 +05:00 [INF] Executed DbCommand (265ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-04-28 23:03:11.754 +05:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Username] = N'admin') THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-28 23:03:12.395 +05:00 [INF] User profile is available. Using 'C:\Users\Mobeen Butt\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-28 23:03:12.976 +05:00 [INF] Now listening on: https://localhost:7123
+2026-04-28 23:03:12.978 +05:00 [INF] Now listening on: http://localhost:5244
+2026-04-28 23:03:13.259 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-28 23:03:13.478 +05:00 [INF] Hosting environment: Development
+2026-04-28 23:03:13.482 +05:00 [INF] Content root path: E:\10P\Task-Management-Tool\Clean project\API
+2026-04-28 23:03:14.640 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/index.html - null null
+2026-04-28 23:03:15.827 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/index.html - 200 null text/html;charset=utf-8 1215.5481ms
+2026-04-28 23:03:15.838 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-28 23:03:15.839 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_vs/browserLink - null null
+2026-04-28 23:03:15.861 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - 200 14911 application/javascript; charset=utf-8 22.8143ms
+2026-04-28 23:03:16.084 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_vs/browserLink - 200 null text/javascript; charset=UTF-8 245.6279ms
+2026-04-28 23:03:16.485 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/v1/swagger.json - null null
+2026-04-28 23:03:16.720 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 235.2827ms
+2026-04-28 23:03:21.555 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-28 23:03:21.568 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - 200 14911 application/javascript; charset=utf-8 13.8964ms
+2026-04-28 23:03:21.621 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_vs/browserLink - null null
+2026-04-28 23:03:21.642 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.0688ms
+2026-04-28 23:03:31.048 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 50
+2026-04-28 23:03:33.290 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:03:33.323 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:03:33.586 +05:00 [INF] Executed DbCommand (93ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:03:34.229 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:03:34.245 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 913.1778ms
+2026-04-28 23:03:34.247 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:03:34.257 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 3209.315ms
+2026-04-28 23:04:37.217 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Task/create - application/json 234
+2026-04-28 23:04:37.311 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.CreateTask (API)'
+2026-04-28 23:04:37.316 +05:00 [INF] Route matched with {action = "CreateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateTask(Application.DTOs.CreateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:04:37.739 +05:00 [ERR] Failed executing DbCommand (8ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Tasks] ([Category], [Description], [DueDate], [Priority], [Status], [Title], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-04-28 23:04:37.820 +05:00 [ERR] An exception occurred in the database while saving changes for context type 'Infrastructure.ApplicationDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Category'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:11970713-f3ea-4d88-8b86-2e423671296e
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Category'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:11970713-f3ea-4d88-8b86-2e423671296e
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2026-04-28 23:04:38.095 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:04:38.099 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.CreateTask (API) in 778.8358ms
+2026-04-28 23:04:38.101 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.CreateTask (API)'
+2026-04-28 23:04:38.104 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Task/create - 500 null text/plain; charset=utf-8 886.9844ms
+2026-04-28 23:05:11.929 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Task/create - application/json 206
+2026-04-28 23:05:11.973 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.CreateTask (API)'
+2026-04-28 23:05:11.975 +05:00 [INF] Route matched with {action = "CreateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateTask(Application.DTOs.CreateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:05:11.991 +05:00 [ERR] Failed executing DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Tasks] ([Category], [Description], [DueDate], [Priority], [Status], [Title], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-04-28 23:05:12.001 +05:00 [ERR] An exception occurred in the database while saving changes for context type 'Infrastructure.ApplicationDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Category'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:11970713-f3ea-4d88-8b86-2e423671296e
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Category'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:11970713-f3ea-4d88-8b86-2e423671296e
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2026-04-28 23:05:12.117 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:05:12.125 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.CreateTask (API) in 142.1462ms
+2026-04-28 23:05:12.129 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.CreateTask (API)'
+2026-04-28 23:05:12.131 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Task/create - 500 null text/plain; charset=utf-8 202.0242ms
+2026-04-28 23:10:46.644 +05:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-28 23:10:46.732 +05:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-28 23:10:46.737 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-28 23:10:46.741 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-28 23:10:46.791 +05:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-28 23:10:46.816 +05:00 [INF] Applying migration '20260428180944_AddCategoryToTask'.
+2026-04-28 23:10:46.955 +05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Users]') AND [c].[name] = N'Username');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Users] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Users] ALTER COLUMN [Username] nvarchar(max) NULL;
+2026-04-28 23:10:46.999 +05:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Users]') AND [c].[name] = N'Role');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Users] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Users] ALTER COLUMN [Role] nvarchar(max) NULL;
+2026-04-28 23:10:47.106 +05:00 [INF] Executed DbCommand (102ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var2 sysname;
+SELECT @var2 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Users]') AND [c].[name] = N'PasswordHash');
+IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [Users] DROP CONSTRAINT [' + @var2 + '];');
+ALTER TABLE [Users] ALTER COLUMN [PasswordHash] nvarchar(max) NULL;
+2026-04-28 23:10:47.117 +05:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Tasks] ADD [Category] nvarchar(max) NULL;
+2026-04-28 23:10:47.124 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260428180944_AddCategoryToTask', N'8.0.0');
+2026-04-28 23:11:03.921 +05:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-28 23:11:04.117 +05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-04-28 23:11:05.045 +05:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Username] = N'admin') THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-28 23:11:05.288 +05:00 [INF] User profile is available. Using 'C:\Users\Mobeen Butt\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-28 23:11:05.640 +05:00 [INF] Now listening on: https://localhost:7123
+2026-04-28 23:11:05.642 +05:00 [INF] Now listening on: http://localhost:5244
+2026-04-28 23:11:05.850 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-28 23:11:05.856 +05:00 [INF] Hosting environment: Development
+2026-04-28 23:11:05.859 +05:00 [INF] Content root path: E:\10P\Task-Management-Tool\Clean project\API
+2026-04-28 23:11:06.625 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/index.html - null null
+2026-04-28 23:11:07.104 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/index.html - 200 null text/html;charset=utf-8 494.333ms
+2026-04-28 23:11:07.146 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_vs/browserLink - null null
+2026-04-28 23:11:07.146 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-28 23:11:07.208 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - 200 14911 application/javascript; charset=utf-8 30.8366ms
+2026-04-28 23:11:07.272 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_vs/browserLink - 200 null text/javascript; charset=UTF-8 125.5408ms
+2026-04-28 23:11:07.396 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/v1/swagger.json - null null
+2026-04-28 23:11:07.454 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 57.6667ms
+2026-04-28 23:11:10.205 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-28 23:11:10.205 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_vs/browserLink - null null
+2026-04-28 23:11:10.211 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - 200 14911 application/javascript; charset=utf-8 6.4698ms
+2026-04-28 23:11:10.265 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_vs/browserLink - 200 null text/javascript; charset=UTF-8 60.8828ms
+2026-04-28 23:11:21.783 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 50
+2026-04-28 23:11:21.921 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:11:21.950 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:11:22.118 +05:00 [INF] Executed DbCommand (21ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:11:22.878 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:11:22.896 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 937.064ms
+2026-04-28 23:11:22.899 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:11:22.909 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 1126.0917ms
+2026-04-28 23:12:21.529 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Task/create - application/json 172
+2026-04-28 23:12:21.612 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.CreateTask (API)'
+2026-04-28 23:12:21.621 +05:00 [INF] Route matched with {action = "CreateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateTask(Application.DTOs.CreateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:12:21.904 +05:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Tasks] ([Category], [Description], [DueDate], [Priority], [Status], [Title], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-04-28 23:12:21.933 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:12:21.938 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.CreateTask (API) in 313.3309ms
+2026-04-28 23:12:21.954 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.CreateTask (API)'
+2026-04-28 23:12:21.957 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Task/create - 200 null application/json; charset=utf-8 428.2321ms
+2026-04-28 23:12:33.336 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:12:33.350 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:12:33.355 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:12:33.381 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[UserId] = @__userId_0
+2026-04-28 23:12:33.389 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:12:33.401 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 37.7998ms
+2026-04-28 23:12:33.405 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:12:33.407 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 71.3073ms
+2026-04-28 23:12:41.236 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/2 - null null
+2026-04-28 23:12:41.279 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:12:41.286 +05:00 [INF] Route matched with {action = "GetTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTask(Int32) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:12:41.310 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__id_0 AND [t].[UserId] = @__userId_1
+2026-04-28 23:12:41.314 +05:00 [INF] Executing OkObjectResult, writing value of type 'Application.DTOs.TaskResponseDto'.
+2026-04-28 23:12:41.316 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTask (API) in 23.2988ms
+2026-04-28 23:12:41.318 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:12:41.321 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/2 - 200 null application/json; charset=utf-8 85.054ms
+2026-04-28 23:12:46.397 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/1 - null null
+2026-04-28 23:12:46.403 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:12:46.409 +05:00 [INF] Route matched with {action = "GetTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTask(Int32) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:12:46.426 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__id_0 AND [t].[UserId] = @__userId_1
+2026-04-28 23:12:46.531 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:12:46.534 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTask (API) in 120.0789ms
+2026-04-28 23:12:46.536 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:12:46.539 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/1 - 500 null text/plain; charset=utf-8 141.2187ms
+2026-04-28 23:12:55.915 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/3 - null null
+2026-04-28 23:12:55.938 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:12:55.940 +05:00 [INF] Route matched with {action = "GetTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTask(Int32) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:12:55.945 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__id_0 AND [t].[UserId] = @__userId_1
+2026-04-28 23:12:56.006 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:12:56.008 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTask (API) in 65.4983ms
+2026-04-28 23:12:56.011 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:12:56.013 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/3 - 500 null text/plain; charset=utf-8 98.4645ms
+2026-04-28 23:13:29.127 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/1 - application/json 220
+2026-04-28 23:13:29.146 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:13:29.150 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:13:29.172 +05:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:13:29.242 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:13:29.244 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 86.9321ms
+2026-04-28 23:13:29.246 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:13:29.248 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/1 - 500 null text/plain; charset=utf-8 120.7043ms
+2026-04-28 23:13:36.985 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/2 - application/json 220
+2026-04-28 23:13:36.990 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:13:36.992 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:13:37.001 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:13:37.058 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:13:37.059 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 63.0588ms
+2026-04-28 23:13:37.062 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:13:37.063 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/2 - 500 null text/plain; charset=utf-8 77.8961ms
+2026-04-28 23:13:42.522 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/2 - application/json 220
+2026-04-28 23:13:42.527 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:13:42.540 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:13:42.555 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:13:42.607 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:13:42.609 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 56.5454ms
+2026-04-28 23:13:42.616 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:13:42.623 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/2 - 500 null text/plain; charset=utf-8 101.716ms
+2026-04-28 23:13:55.091 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/dashboard - null null
+2026-04-28 23:13:55.117 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:13:55.120 +05:00 [INF] Route matched with {action = "GetDashboard", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboard() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:13:55.136 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_Value_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[UserId] = @__userId_Value_0
+2026-04-28 23:13:55.144 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:13:55.148 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetDashboard (API) in 21.1555ms
+2026-04-28 23:13:55.150 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:13:55.152 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/dashboard - 200 null application/json; charset=utf-8 61.5866ms
+2026-04-28 23:14:13.492 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/register - application/json 46
+2026-04-28 23:14:13.500 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-04-28 23:14:13.505 +05:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(RegisterRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:14:13.521 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:14:13.585 +05:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2026-04-28 23:14:13.587 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Register (API) in 77.4905ms
+2026-04-28 23:14:13.589 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-04-28 23:14:13.591 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/register - 400 null text/plain; charset=utf-8 98.6994ms
+2026-04-28 23:14:23.372 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/register - application/json 45
+2026-04-28 23:14:23.377 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-04-28 23:14:23.379 +05:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(RegisterRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:14:23.389 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:14:23.743 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([PasswordHash], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2);
+2026-04-28 23:14:23.750 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:14:23.753 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Register (API) in 369.7904ms
+2026-04-28 23:14:23.755 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-04-28 23:14:23.756 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/register - 200 null application/json; charset=utf-8 384.3555ms
+2026-04-28 23:14:47.028 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 45
+2026-04-28 23:14:47.041 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:14:47.042 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:14:47.058 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:14:47.251 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:14:47.254 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 200.9186ms
+2026-04-28 23:14:47.256 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:14:47.258 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 230.5435ms
+2026-04-28 23:15:10.648 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/dashboard - null null
+2026-04-28 23:15:10.653 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:15:10.656 +05:00 [INF] Route matched with {action = "GetDashboard", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboard() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:15:10.663 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_Value_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[UserId] = @__userId_Value_0
+2026-04-28 23:15:10.669 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:15:10.676 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetDashboard (API) in 15.7632ms
+2026-04-28 23:15:10.677 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:15:10.680 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/dashboard - 200 null application/json; charset=utf-8 32.7563ms
+2026-04-28 23:15:33.289 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:15:33.294 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:15:33.299 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:15:33.338 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[UserId] = @__userId_0
+2026-04-28 23:15:33.348 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:15:33.350 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 16.5703ms
+2026-04-28 23:15:33.352 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:15:33.355 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 65.7456ms
+2026-04-28 23:15:40.465 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/3 - null null
+2026-04-28 23:15:40.474 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:15:40.480 +05:00 [INF] Route matched with {action = "GetTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTask(Int32) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:15:40.486 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__id_0 AND [t].[UserId] = @__userId_1
+2026-04-28 23:15:40.533 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:15:40.536 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTask (API) in 51.5617ms
+2026-04-28 23:15:40.538 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:15:40.540 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/3 - 500 null text/plain; charset=utf-8 74.6819ms
+2026-04-28 23:15:44.924 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/2 - null null
+2026-04-28 23:15:44.929 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:15:44.932 +05:00 [INF] Route matched with {action = "GetTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTask(Int32) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:15:44.937 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__id_0 AND [t].[UserId] = @__userId_1
+2026-04-28 23:15:45.001 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:15:45.003 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTask (API) in 68.2066ms
+2026-04-28 23:15:45.008 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTask (API)'
+2026-04-28 23:15:45.010 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/2 - 500 null text/plain; charset=utf-8 86.5922ms
+2026-04-28 23:15:59.326 +05:00 [INF] Request starting HTTP/2 DELETE https://localhost:7123/api/Task/delete/2 - null null
+2026-04-28 23:15:59.343 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.DeleteTask (API)'
+2026-04-28 23:15:59.346 +05:00 [INF] Route matched with {action = "DeleteTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DeleteTask(Int32) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:15:59.354 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__id_0 AND [t].[UserId] = @__userId_1
+2026-04-28 23:15:59.408 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:15:59.410 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.DeleteTask (API) in 59.5722ms
+2026-04-28 23:15:59.412 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.DeleteTask (API)'
+2026-04-28 23:15:59.422 +05:00 [INF] Request finished HTTP/2 DELETE https://localhost:7123/api/Task/delete/2 - 500 null text/plain; charset=utf-8 96.136ms
+2026-04-28 23:16:15.763 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 52
+2026-04-28 23:16:15.769 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:16:15.772 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:16:15.782 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:16:15.982 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:16:15.986 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 206.7412ms
+2026-04-28 23:16:15.989 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:16:15.991 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 229.1644ms
+2026-04-28 23:16:33.314 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:16:33.366 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenException: IDX10612: Decryption failed. Header.Enc is null or empty, it must be specified.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.DecryptToken(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWEAsync(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-04-28 23:16:33.394 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10612: Decryption failed. Header.Enc is null or empty, it must be specified.
+2026-04-28 23:16:33.396 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:16:33.397 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:16:33.445 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:16:33.447 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 47.604ms
+2026-04-28 23:16:33.449 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:16:33.453 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 500 null text/plain; charset=utf-8 138.7857ms
+2026-04-28 23:16:41.721 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:16:41.726 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenException: IDX10612: Decryption failed. Header.Enc is null or empty, it must be specified.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.DecryptToken(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWEAsync(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-04-28 23:16:41.733 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10612: Decryption failed. Header.Enc is null or empty, it must be specified.
+2026-04-28 23:16:41.736 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:16:41.738 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:16:41.788 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:16:41.791 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 45.7173ms
+2026-04-28 23:16:41.793 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:16:41.795 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 500 null text/plain; charset=utf-8 74.2131ms
+2026-04-28 23:18:26.662 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/dashboard - null null
+2026-04-28 23:18:26.678 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenException: IDX10612: Decryption failed. Header.Enc is null or empty, it must be specified.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.DecryptToken(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWEAsync(JsonWebToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-04-28 23:18:26.681 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10612: Decryption failed. Header.Enc is null or empty, it must be specified.
+2026-04-28 23:18:26.686 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:18:26.688 +05:00 [INF] Route matched with {action = "GetDashboard", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboard() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:18:26.742 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-04-28 23:18:26.744 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetDashboard (API) in 52.2585ms
+2026-04-28 23:18:26.746 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:18:26.748 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/dashboard - 500 null text/plain; charset=utf-8 86.2272ms
+2026-04-28 23:19:41.298 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 52
+2026-04-28 23:19:41.341 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:19:41.343 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-04-28 23:19:41.355 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-04-28 23:19:41.570 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:19:41.575 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 226.9459ms
+2026-04-28 23:19:41.580 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-04-28 23:19:41.586 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 287.2782ms
+2026-04-28 23:20:32.767 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:20:32.781 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:20:32.783 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:20:32.796 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:20:32.802 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:20:32.805 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 17.8664ms
+2026-04-28 23:20:32.808 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:20:32.811 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 44.4096ms
+2026-04-28 23:21:03.321 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/2 - application/json 220
+2026-04-28 23:21:03.333 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:03.336 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:03.348 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:21:03.371 +05:00 [INF] Executed DbCommand (11ms) [Parameters=[@p4='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tasks] SET [Description] = @p0, [DueDate] = @p1, [Priority] = @p2, [Title] = @p3
+OUTPUT 1
+WHERE [Id] = @p4;
+2026-04-28 23:21:03.377 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:21:03.382 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 38.1251ms
+2026-04-28 23:21:03.384 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:03.392 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/2 - 200 null application/json; charset=utf-8 71.0125ms
+2026-04-28 23:21:08.849 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:21:08.853 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:21:08.856 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:08.863 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:21:08.868 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:21:08.872 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 12.9208ms
+2026-04-28 23:21:08.874 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:21:08.878 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 29.9949ms
+2026-04-28 23:21:23.493 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/4 - application/json 220
+2026-04-28 23:21:23.498 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:23.501 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:23.511 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:21:23.516 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:21:23.518 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 9.0135ms
+2026-04-28 23:21:23.525 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:23.527 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/4 - 200 null application/json; charset=utf-8 34.3368ms
+2026-04-28 23:21:31.559 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/4 - application/json 220
+2026-04-28 23:21:31.564 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:31.566 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:31.572 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:21:31.578 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:21:31.587 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 16.5848ms
+2026-04-28 23:21:31.591 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:31.594 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/4 - 200 null application/json; charset=utf-8 34.8424ms
+2026-04-28 23:21:36.857 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/4 - application/json 220
+2026-04-28 23:21:36.871 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:36.873 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:36.878 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:21:36.885 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:21:36.887 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 11.5241ms
+2026-04-28 23:21:36.889 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:21:36.901 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/4 - 200 null application/json; charset=utf-8 43.7374ms
+2026-04-28 23:21:42.886 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:21:42.891 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:21:42.893 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:42.902 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:21:42.905 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:21:42.907 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 7.1233ms
+2026-04-28 23:21:42.909 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:21:42.914 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 28.5715ms
+2026-04-28 23:21:45.624 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:21:45.632 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:21:45.635 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:21:45.640 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:21:45.650 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:21:45.652 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 13.4149ms
+2026-04-28 23:21:45.654 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:21:45.656 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 32.1314ms
+2026-04-28 23:22:01.686 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/1 - application/json 207
+2026-04-28 23:22:01.723 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:22:01.726 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:22:01.735 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:22:01.747 +05:00 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tasks] SET [Title] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-04-28 23:22:01.751 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:22:01.755 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 23.4815ms
+2026-04-28 23:22:01.757 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:22:01.759 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/1 - 200 null application/json; charset=utf-8 74.1764ms
+2026-04-28 23:22:04.948 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:22:04.954 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:22:04.956 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:22:04.964 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:22:04.972 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:22:04.976 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 14.2706ms
+2026-04-28 23:22:04.978 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:22:04.980 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 31.9046ms
+2026-04-28 23:22:14.740 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/dashboard - null null
+2026-04-28 23:22:14.794 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:22:14.799 +05:00 [INF] Route matched with {action = "GetDashboard", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboard() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:22:14.804 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:22:14.809 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:22:14.812 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetDashboard (API) in 9.6013ms
+2026-04-28 23:22:14.816 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:22:14.818 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/dashboard - 200 null application/json; charset=utf-8 77.5719ms
+2026-04-28 23:22:25.117 +05:00 [INF] Request starting HTTP/2 PUT https://localhost:7123/api/Task/update/1 - application/json 206
+2026-04-28 23:22:25.123 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:22:25.124 +05:00 [INF] Route matched with {action = "UpdateTask", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateTask(Int32, Application.DTOs.UpdateTaskDto) on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:22:25.131 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+WHERE [t].[Id] = @__userId_0
+2026-04-28 23:22:25.138 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:22:25.141 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.UpdateTask (API) in 11.7002ms
+2026-04-28 23:22:25.146 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.UpdateTask (API)'
+2026-04-28 23:22:25.147 +05:00 [INF] Request finished HTTP/2 PUT https://localhost:7123/api/Task/update/1 - 200 null application/json; charset=utf-8 30.1264ms
+2026-04-28 23:22:31.798 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/all - null null
+2026-04-28 23:22:31.803 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:22:31.806 +05:00 [INF] Route matched with {action = "GetTasks", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTasks() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:22:31.813 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:22:31.818 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.TaskResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-28 23:22:31.821 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetTasks (API) in 10.8343ms
+2026-04-28 23:22:31.825 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetTasks (API)'
+2026-04-28 23:22:31.827 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/all - 200 null application/json; charset=utf-8 29.5031ms
+2026-04-28 23:22:47.987 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Task/dashboard - null null
+2026-04-28 23:22:48.023 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:22:48.027 +05:00 [INF] Route matched with {action = "GetDashboard", controller = "Task"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboard() on controller API.Properties.Controllers.TaskController (API).
+2026-04-28 23:22:48.033 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Category], [t].[Description], [t].[DueDate], [t].[Priority], [t].[Status], [t].[Title], [t].[UserId]
+FROM [Tasks] AS [t]
+2026-04-28 23:22:48.038 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-28 23:22:48.040 +05:00 [INF] Executed action API.Properties.Controllers.TaskController.GetDashboard (API) in 9.0617ms
+2026-04-28 23:22:48.042 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.TaskController.GetDashboard (API)'
+2026-04-28 23:22:48.044 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Task/dashboard - 200 null application/json; charset=utf-8 57.331ms

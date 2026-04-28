@@ -1,7 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
 using Domain.Entites;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infrastructure.TaskServices
 {
@@ -15,14 +14,15 @@ namespace Infrastructure.TaskServices
 
         void ITaskService.Create(CreateTaskDto dto, int userId)
         {
-           var task=new TaskItem
+            var task = new TaskItem
             {
-                Title=dto.Title,
-                Description=dto.Description,
-                Status=dto.Status,
-                Priority=dto.Priority,
-                DueDate=dto.DueDate,
-                UserId=userId
+                Title = dto.Title,
+                Description = dto.Description,
+                Status = dto.Status,
+                Priority = dto.Priority,
+                DueDate = dto.DueDate,
+                Category = dto.Category,
+                UserId = userId
             };
             _context.Tasks.Add(task);
             _context.SaveChanges();
@@ -33,8 +33,8 @@ namespace Infrastructure.TaskServices
 
         void ITaskService.Delete(int id, int userId)
         {
-            var task=_context.Tasks.FirstOrDefault(t=>t.Id==id && t.UserId==userId);
-            if(task==null)
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == userId);
+            if (task == null)
                 throw new Exception("Task not found or access denied.");
             _context.Tasks.Remove(task);
             _context.SaveChanges();
@@ -42,34 +42,36 @@ namespace Infrastructure.TaskServices
 
         List<TaskResponseDto> ITaskService.GetAllByUserId(int userId)
         {
-            var tasks=_context.Tasks.Where(t=>t.UserId==userId).ToList();
-            return tasks.Select(t=>new TaskResponseDto
+            var tasks = _context.Tasks.Where(t => t.UserId == userId).ToList();
+            return tasks.Select(t => new TaskResponseDto
             {
-                Id=t.Id,
-                Title=t.Title,
-                Description=t.Description,
-                Status=t.Status,
-                Priority=t.Priority,
-                DueDate=t.DueDate,
-                UserId=t.UserId
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                Status = t.Status,
+                Priority = t.Priority,
+                DueDate = t.DueDate,
+                UserId = t.UserId,
+                 Category = t.Category,
             }).ToList();
         }
-           
+
 
 
 
         List<TaskResponseDto> ITaskService.GetAllTasks()
         {
             var tasks = _context.Tasks.ToList();
-            return tasks.Select(t=>new TaskResponseDto
+            return tasks.Select(t => new TaskResponseDto
             {
-                Id=t.Id,
-                Title=t.Title,
-                Description=t.Description,
-                Status=t.Status,
-                Priority=t.Priority,
-                DueDate=t.DueDate,
-                UserId=t.UserId
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                Status = t.Status,
+                Priority = t.Priority,
+                DueDate = t.DueDate,
+                UserId = t.UserId,
+                Category = t.Category,
             }).ToList();
         }
 
@@ -87,7 +89,8 @@ namespace Infrastructure.TaskServices
                 Status = task.Status,
                 Priority = task.Priority,
                 DueDate = task.DueDate,
-                UserId = task.UserId
+                UserId = task.UserId,
+                 Category = task.Category,
             };
         }
 
@@ -102,9 +105,17 @@ namespace Infrastructure.TaskServices
             };
         }
 
-        void ITaskService.Update(UpdateTaskDto task, int userId)
+        void ITaskService.Update(UpdateTaskDto dto, int userId)
         {
-            throw new NotImplementedException();
+            var task=_context.Tasks.FirstOrDefault(_t => _t.Id == userId);
+            if (task == null) throw new Exception("Task not found or access denied");
+            task.Title = dto.Title;
+            task.Description = dto.Description;
+            task.Priority= dto.Priority;
+            task.DueDate = dto.DueDate;
+            task.Category= dto.Category;
+
+            _context.SaveChanges();
         }
     }
 }
