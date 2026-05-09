@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entites;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,10 +21,11 @@ namespace Infrastructure.UserServices
 
         public string Register(string username, string password)
         {
-            var checkUser = _context.Users.FirstOrDefault(u => u.Username == username);
-            if (checkUser != null)
+            var checkUser = _context.Users.IgnoreQueryFilters().FirstOrDefault(u => u.Username == username);
+            
+            if (checkUser != null && checkUser.IsDeleted)
             {
-                throw new Exception("User already exists");
+                throw new Exception("This username was previously used and cannot be registered again");
             }
             //Hash password using BCrypt
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);

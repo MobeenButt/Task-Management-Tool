@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
 using Domain.Entites;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.TaskServices
 {
@@ -36,8 +37,24 @@ namespace Infrastructure.TaskServices
             var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == userId);
             if (task == null)
                 throw new Exception("Task not found or access denied.");
-            _context.Tasks.Remove(task);
+            //_context.Tasks.Remove(task);
+            // now we will do soft delete 
+            task.IsDeleted = true;
+            task.DeletedAt = DateTime.UtcNow;
+            task.DeletedBy= userId;
             _context.SaveChanges();
+        }
+
+        // for optional admin to permanently delete a task
+        public void PermanentlyDelete(int id)
+        {
+            var task=_context.Tasks.IgnoreQueryFilters().FirstOrDefault(t => t.Id == id);
+            if(task!=null)
+            {
+                _context.Tasks.Remove(task);
+                _context.SaveChanges();
+            }
+
         }
 
         List<TaskResponseDto> ITaskService.GetAllByUserId(int userId)

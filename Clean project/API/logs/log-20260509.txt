@@ -1,0 +1,331 @@
+2026-05-09 20:11:16.356 +05:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-09 20:11:16.453 +05:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-05-09 20:11:16.463 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-09 20:11:16.468 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-05-09 20:11:16.517 +05:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-05-09 20:11:16.542 +05:00 [INF] Applying migration '20260509151058_AddSoftDeleteAndCategories'.
+2026-05-09 20:11:16.609 +05:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Users] ADD [DeletedAt] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+2026-05-09 20:11:16.619 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Users] ADD [DeletedBy] int NOT NULL DEFAULT 0;
+2026-05-09 20:11:16.629 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Users] ADD [IsDeleted] bit NOT NULL DEFAULT CAST(0 AS bit);
+2026-05-09 20:11:16.725 +05:00 [INF] Executed DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Tasks]') AND [c].[name] = N'Title');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Tasks] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Tasks] ALTER COLUMN [Title] nvarchar(max) NULL;
+2026-05-09 20:11:16.775 +05:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Tasks]') AND [c].[name] = N'Description');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Tasks] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Tasks] ALTER COLUMN [Description] nvarchar(max) NULL;
+2026-05-09 20:11:16.795 +05:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Tasks] ADD [DeletedAt] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+2026-05-09 20:11:16.829 +05:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Tasks] ADD [DeletedBy] int NOT NULL DEFAULT 0;
+2026-05-09 20:11:16.845 +05:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Tasks] ADD [IsDeleted] bit NOT NULL DEFAULT CAST(0 AS bit);
+2026-05-09 20:11:16.862 +05:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Categories] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [Description] nvarchar(max) NULL,
+    [CreatedBy] int NOT NULL,
+    [CreatedDate] datetime2 NOT NULL,
+    [IsDeleted] bit NOT NULL,
+    [DeletedAt] datetime2 NOT NULL,
+    [DeletedBy] int NOT NULL,
+    CONSTRAINT [PK_Categories] PRIMARY KEY ([Id])
+);
+2026-05-09 20:11:16.875 +05:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260509151058_AddSoftDeleteAndCategories', N'8.0.0');
+2026-05-09 21:48:30.961 +05:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-09 21:48:31.254 +05:00 [INF] Executed DbCommand (146ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-09 21:48:31.901 +05:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Username] = N'admin') THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-09 21:48:32.500 +05:00 [INF] User profile is available. Using 'C:\Users\Mobeen Butt\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-09 21:48:33.423 +05:00 [INF] Now listening on: https://localhost:7123
+2026-05-09 21:48:33.425 +05:00 [INF] Now listening on: http://localhost:5244
+2026-05-09 21:48:34.070 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-09 21:48:34.079 +05:00 [INF] Hosting environment: Development
+2026-05-09 21:48:34.157 +05:00 [INF] Content root path: E:\10P\Task-Management-Tool\Clean project\API
+2026-05-09 21:48:35.759 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/index.html - null null
+2026-05-09 21:48:36.690 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/index.html - 200 null text/html;charset=utf-8 958.4889ms
+2026-05-09 21:48:36.987 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-09 21:48:37.147 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_vs/browserLink - null null
+2026-05-09 21:48:37.470 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - 200 14911 application/javascript; charset=utf-8 483.8195ms
+2026-05-09 21:48:37.620 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_vs/browserLink - 200 null text/javascript; charset=UTF-8 473.1921ms
+2026-05-09 21:48:38.620 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-09 21:48:38.621 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/_vs/browserLink - null null
+2026-05-09 21:48:38.627 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_framework/aspnetcore-browser-refresh.js - 200 14911 application/javascript; charset=utf-8 7.2329ms
+2026-05-09 21:48:38.665 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/_vs/browserLink - 200 null text/javascript; charset=UTF-8 44.3344ms
+2026-05-09 21:48:38.681 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/v1/swagger.json - null null
+2026-05-09 21:48:38.684 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/swagger/favicon-32x32.png - null null
+2026-05-09 21:48:38.709 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-05-09 21:48:38.711 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 29.842ms
+2026-05-09 21:48:38.720 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/swagger/favicon-32x32.png - 200 628 image/png 35.3016ms
+2026-05-09 21:50:30.283 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 52
+2026-05-09 21:50:33.314 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:50:33.368 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:50:33.742 +05:00 [INF] Executed DbCommand (123ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Username] = @__username_0
+2026-05-09 21:50:34.453 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:50:34.467 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 1090.528ms
+2026-05-09 21:50:34.469 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:50:34.482 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 4198.443ms
+2026-05-09 21:51:09.801 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/register - application/json 50
+2026-05-09 21:51:09.900 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-05-09 21:51:09.905 +05:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(RegisterRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:51:10.046 +05:00 [INF] Executed DbCommand (8ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-05-09 21:51:10.434 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([DeletedAt], [DeletedBy], [IsDeleted], [PasswordHash], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-05-09 21:51:10.477 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:51:10.481 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Register (API) in 570.3684ms
+2026-05-09 21:51:10.483 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-05-09 21:51:10.485 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/register - 200 null application/json; charset=utf-8 683.8338ms
+2026-05-09 21:51:29.434 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/register - application/json 50
+2026-05-09 21:51:29.441 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-05-09 21:51:29.443 +05:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(RegisterRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:51:29.457 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-05-09 21:51:29.667 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([DeletedAt], [DeletedBy], [IsDeleted], [PasswordHash], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-05-09 21:51:29.672 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:51:29.675 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Register (API) in 226.9491ms
+2026-05-09 21:51:29.677 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-05-09 21:51:29.679 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/register - 200 null application/json; charset=utf-8 244.6073ms
+2026-05-09 21:51:35.162 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/register - application/json 51
+2026-05-09 21:51:35.167 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-05-09 21:51:35.169 +05:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(RegisterRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:51:35.176 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__username_0
+2026-05-09 21:51:35.409 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([DeletedAt], [DeletedBy], [IsDeleted], [PasswordHash], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-05-09 21:51:35.417 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:51:35.420 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Register (API) in 247.0676ms
+2026-05-09 21:51:35.422 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Register (API)'
+2026-05-09 21:51:35.433 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/register - 200 null application/json; charset=utf-8 270.7067ms
+2026-05-09 21:52:05.650 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 53
+2026-05-09 21:52:05.661 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:52:05.663 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:52:05.671 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Username] = @__username_0
+2026-05-09 21:52:06.035 +05:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:52:06.044 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 377.0577ms
+2026-05-09 21:52:06.051 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:52:06.054 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 401 null application/json; charset=utf-8 404.5831ms
+2026-05-09 21:52:32.673 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Category/create - application/json 60
+2026-05-09 21:52:32.709 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.CreateCategory (API)'
+2026-05-09 21:52:32.714 +05:00 [INF] Route matched with {action = "CreateCategory", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateCategory(Application.DTOs.CategoryDtos) on controller API.Controllers.CategoryController (API).
+2026-05-09 21:52:32.778 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__ToLower_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[CreatedDate], [c].[DeletedAt], [c].[DeletedBy], [c].[Description], [c].[IsDeleted], [c].[Name]
+FROM [Categories] AS [c]
+WHERE [c].[IsDeleted] = CAST(0 AS bit) AND LOWER([c].[Name]) = @__ToLower_0
+2026-05-09 21:52:32.808 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Categories] ([CreatedBy], [CreatedDate], [DeletedAt], [DeletedBy], [Description], [IsDeleted], [Name])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-05-09 21:52:32.813 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:52:32.816 +05:00 [INF] Executed action API.Controllers.CategoryController.CreateCategory (API) in 98.3847ms
+2026-05-09 21:52:32.828 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.CreateCategory (API)'
+2026-05-09 21:52:32.829 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Category/create - 200 null application/json; charset=utf-8 156.2986ms
+2026-05-09 21:53:13.475 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Category/create - application/json 74
+2026-05-09 21:53:13.486 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.CreateCategory (API)'
+2026-05-09 21:53:13.488 +05:00 [INF] Route matched with {action = "CreateCategory", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateCategory(Application.DTOs.CategoryDtos) on controller API.Controllers.CategoryController (API).
+2026-05-09 21:53:13.496 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[CreatedDate], [c].[DeletedAt], [c].[DeletedBy], [c].[Description], [c].[IsDeleted], [c].[Name]
+FROM [Categories] AS [c]
+WHERE [c].[IsDeleted] = CAST(0 AS bit) AND LOWER([c].[Name]) = @__ToLower_0
+2026-05-09 21:53:13.510 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Categories] ([CreatedBy], [CreatedDate], [DeletedAt], [DeletedBy], [Description], [IsDeleted], [Name])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-05-09 21:53:13.522 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:53:13.525 +05:00 [INF] Executed action API.Controllers.CategoryController.CreateCategory (API) in 33.3779ms
+2026-05-09 21:53:13.537 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.CreateCategory (API)'
+2026-05-09 21:53:13.539 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Category/create - 200 null application/json; charset=utf-8 63.6862ms
+2026-05-09 21:53:38.153 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Category/create - application/json 74
+2026-05-09 21:53:38.167 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.CreateCategory (API)'
+2026-05-09 21:53:38.172 +05:00 [INF] Route matched with {action = "CreateCategory", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateCategory(Application.DTOs.CategoryDtos) on controller API.Controllers.CategoryController (API).
+2026-05-09 21:53:38.183 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[CreatedDate], [c].[DeletedAt], [c].[DeletedBy], [c].[Description], [c].[IsDeleted], [c].[Name]
+FROM [Categories] AS [c]
+WHERE [c].[IsDeleted] = CAST(0 AS bit) AND LOWER([c].[Name]) = @__ToLower_0
+2026-05-09 21:53:38.246 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-05-09 21:53:38.248 +05:00 [INF] Executed action API.Controllers.CategoryController.CreateCategory (API) in 69.5921ms
+2026-05-09 21:53:38.259 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.CreateCategory (API)'
+2026-05-09 21:53:38.261 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Category/create - 500 null text/plain; charset=utf-8 108.0816ms
+2026-05-09 21:53:52.860 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/all - null null
+2026-05-09 21:53:52.887 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.GetAllCategories (API)'
+2026-05-09 21:53:52.903 +05:00 [INF] Route matched with {action = "GetAllCategories", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCategories() on controller API.Controllers.CategoryController (API).
+2026-05-09 21:53:52.966 +05:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], [c].[Description], [c].[CreatedBy], [t].[Username] AS [CreatedByUsername], [c].[CreatedDate]
+FROM [Categories] AS [c]
+INNER JOIN (
+    SELECT [u].[Id], [u].[Username]
+    FROM [Users] AS [u]
+    WHERE [u].[IsDeleted] = CAST(0 AS bit)
+) AS [t] ON [c].[CreatedBy] = [t].[Id]
+WHERE [c].[IsDeleted] = CAST(0 AS bit)
+2026-05-09 21:53:52.970 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Application.DTOs.CategoryResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-09 21:53:52.984 +05:00 [INF] Executed action API.Controllers.CategoryController.GetAllCategories (API) in 77.1014ms
+2026-05-09 21:53:52.986 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.GetAllCategories (API)'
+2026-05-09 21:53:52.987 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/all - 200 null application/json; charset=utf-8 127.0706ms
+2026-05-09 21:54:11.775 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/1 - null null
+2026-05-09 21:54:11.779 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.GetCategory (API)'
+2026-05-09 21:54:11.786 +05:00 [INF] Route matched with {action = "GetCategory", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCategory(Int32) on controller API.Controllers.CategoryController (API).
+2026-05-09 21:54:11.803 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[CreatedDate], [c].[DeletedAt], [c].[DeletedBy], [c].[Description], [c].[IsDeleted], [c].[Name]
+FROM [Categories] AS [c]
+WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @__id_0
+2026-05-09 21:54:11.816 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__category_CreatedBy_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Id] = @__category_CreatedBy_0
+2026-05-09 21:54:11.820 +05:00 [INF] Executing OkObjectResult, writing value of type 'Application.DTOs.CategoryResponseDto'.
+2026-05-09 21:54:11.822 +05:00 [INF] Executed action API.Controllers.CategoryController.GetCategory (API) in 30.2404ms
+2026-05-09 21:54:11.828 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.GetCategory (API)'
+2026-05-09 21:54:11.831 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/1 - 200 null application/json; charset=utf-8 56.648ms
+2026-05-09 21:54:17.142 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/2 - null null
+2026-05-09 21:54:17.145 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.GetCategory (API)'
+2026-05-09 21:54:17.184 +05:00 [INF] Route matched with {action = "GetCategory", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCategory(Int32) on controller API.Controllers.CategoryController (API).
+2026-05-09 21:54:17.192 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[CreatedDate], [c].[DeletedAt], [c].[DeletedBy], [c].[Description], [c].[IsDeleted], [c].[Name]
+FROM [Categories] AS [c]
+WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @__id_0
+2026-05-09 21:54:17.198 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__category_CreatedBy_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Id] = @__category_CreatedBy_0
+2026-05-09 21:54:17.202 +05:00 [INF] Executing OkObjectResult, writing value of type 'Application.DTOs.CategoryResponseDto'.
+2026-05-09 21:54:17.206 +05:00 [INF] Executed action API.Controllers.CategoryController.GetCategory (API) in 19.2034ms
+2026-05-09 21:54:17.209 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.GetCategory (API)'
+2026-05-09 21:54:17.210 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/2 - 200 null application/json; charset=utf-8 68.7553ms
+2026-05-09 21:54:19.345 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/4 - null null
+2026-05-09 21:54:19.349 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.GetCategory (API)'
+2026-05-09 21:54:19.351 +05:00 [INF] Route matched with {action = "GetCategory", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCategory(Int32) on controller API.Controllers.CategoryController (API).
+2026-05-09 21:54:19.359 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedBy], [c].[CreatedDate], [c].[DeletedAt], [c].[DeletedBy], [c].[Description], [c].[IsDeleted], [c].[Name]
+FROM [Categories] AS [c]
+WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @__id_0
+2026-05-09 21:54:19.447 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-05-09 21:54:19.449 +05:00 [INF] Executed action API.Controllers.CategoryController.GetCategory (API) in 92.4428ms
+2026-05-09 21:54:19.451 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.GetCategory (API)'
+2026-05-09 21:54:19.457 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/4 - 404 null text/plain; charset=utf-8 112.6568ms
+2026-05-09 21:54:50.712 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 51
+2026-05-09 21:54:50.738 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:54:50.743 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:54:50.749 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Username] = @__username_0
+2026-05-09 21:54:51.067 +05:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:54:51.070 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 323.782ms
+2026-05-09 21:54:51.076 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:54:51.084 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 401 null application/json; charset=utf-8 373.8126ms
+2026-05-09 21:55:04.171 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Auth/login - application/json 50
+2026-05-09 21:55:04.175 +05:00 [INF] Executing endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:55:04.177 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(LoginRequest) on controller API.Properties.Controllers.AuthController (API).
+2026-05-09 21:55:04.221 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DeletedAt], [u].[DeletedBy], [u].[IsDeleted], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[Username] = @__username_0
+2026-05-09 21:55:04.456 +05:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`4[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-09 21:55:04.460 +05:00 [INF] Executed action API.Properties.Controllers.AuthController.Login (API) in 248.087ms
+2026-05-09 21:55:04.462 +05:00 [INF] Executed endpoint 'API.Properties.Controllers.AuthController.Login (API)'
+2026-05-09 21:55:04.464 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Auth/login - 200 null application/json; charset=utf-8 292.7485ms
+2026-05-09 21:55:18.226 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/all - null null
+2026-05-09 21:55:18.242 +05:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-05-09 21:55:18.251 +05:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2026-05-09 21:55:18.253 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/all - 403 0 null 27.6195ms
+2026-05-09 21:55:27.417 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/1 - null null
+2026-05-09 21:55:27.425 +05:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-05-09 21:55:27.428 +05:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2026-05-09 21:55:27.430 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/1 - 403 0 null 13.1598ms
+2026-05-09 21:55:47.200 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7123/api/Category/create - application/json 74
+2026-05-09 21:55:47.239 +05:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-05-09 21:55:47.242 +05:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2026-05-09 21:55:47.243 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7123/api/Category/create - 403 0 null 43.1552ms
+2026-05-09 21:56:03.678 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7123/api/Category/list - null null
+2026-05-09 21:56:03.685 +05:00 [INF] Executing endpoint 'API.Controllers.CategoryController.GetCategoriesList (API)'
+2026-05-09 21:56:03.690 +05:00 [INF] Route matched with {action = "GetCategoriesList", controller = "Category"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCategoriesList() on controller API.Controllers.CategoryController (API).
+2026-05-09 21:56:03.699 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], [c].[Description], [c].[CreatedBy], [t].[Username] AS [CreatedByUsername], [c].[CreatedDate]
+FROM [Categories] AS [c]
+INNER JOIN (
+    SELECT [u].[Id], [u].[Username]
+    FROM [Users] AS [u]
+    WHERE [u].[IsDeleted] = CAST(0 AS bit)
+) AS [t] ON [c].[CreatedBy] = [t].[Id]
+WHERE [c].[IsDeleted] = CAST(0 AS bit)
+2026-05-09 21:56:03.704 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[Application.DTOs.CategoryResponseDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType2`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-09 21:56:03.712 +05:00 [INF] Executed action API.Controllers.CategoryController.GetCategoriesList (API) in 17.5657ms
+2026-05-09 21:56:03.714 +05:00 [INF] Executed endpoint 'API.Controllers.CategoryController.GetCategoriesList (API)'
+2026-05-09 21:56:03.716 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7123/api/Category/list - 200 null application/json; charset=utf-8 38.4852ms

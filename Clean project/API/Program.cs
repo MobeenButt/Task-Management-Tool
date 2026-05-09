@@ -2,6 +2,7 @@ using Application;
 using Application.Interfaces;
 using Domain;
 using Infrastructure;
+using Infrastructure.CategoryServices;
 using Infrastructure.TaskServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ builder.Services.AddSwaggerGen(options =>
 // adding my own services
 builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IUserService, Infrastructure.UserServices.UserService>();
 
 //Jwt Authentication
