@@ -11,6 +11,13 @@ namespace Application.Interfaces
     {
         string Register(string username, string password);
         string Login(string username, string password);
-        
+        List<UserDto> GetAllUsers();
+    }
+
+    public class UserDto
+    {
+        public int Id { get; set; }
+        public required string Username { get; set; }
+        public required string Role { get; set; }
     }
 }

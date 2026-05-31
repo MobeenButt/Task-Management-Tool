@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Serilog;
+using API.Middleware;
 
 
 
@@ -82,15 +83,30 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 builder.Host.UseSerilog();
 
+// Add CORS for React frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173") // React default ports
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 
 var app = builder.Build();
 
+// Global Exception Handler Middleware
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
-//seeding Admin user
+//seeding Admin user and sample data
 using(var scope=app.Services.CreateScope())
 {
     var context=scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     Infrastructure.DbInitializer.Initialize(context);
+    Infrastructure.DataSeeder.SeedData(context);
 }
 
 // Configure the HTTP request pipeline.
@@ -102,9 +118,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowReactApp");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+// Make Program class public for integration tests
+public partial class Program { }

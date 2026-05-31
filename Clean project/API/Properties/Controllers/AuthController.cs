@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -64,17 +65,58 @@ namespace API.Properties.Controllers
                 return Unauthorized(new { message = ex.Message });
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("profile")]
+        public IActionResult GetProfile()
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new Exception("User ID not found in token."));
+                var username = User.FindFirst(ClaimTypes.Name)?.Value ?? throw new Exception("Username not found in token.");
+                var role = User.FindFirst(ClaimTypes.Role)?.Value ?? throw new Exception("Role not found in token.");
+
+                return Ok(new
+                {
+                    userId = userId,
+                    username = username,
+                    role = role
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        [Route("users")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                var users = _userService.GetAllUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         // DTOs (Data Transfer Objects)
         public class RegisterRequest
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
+            public required string Username { get; set; }
+            public required string Password { get; set; }
         }
 
         public class LoginRequest
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
+            public required string Username { get; set; }
+            public required string Password { get; set; }
         }
     }
 }

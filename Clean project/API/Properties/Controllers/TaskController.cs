@@ -1,11 +1,13 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace API.Properties.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
@@ -53,7 +55,22 @@ namespace API.Properties.Controllers
             try
             {
                 var userId = GetUserId();
-                var task = taskService.GetById(id, userId);
+                var role = GetUserRole();
+                
+                // Admin can view any task, regular users only their own
+                TaskResponseDto task;
+                if (role == "Admin")
+                {
+                    var taskEntity = taskService.GetAllTasks().FirstOrDefault(t => t.Id == id);
+                    if (taskEntity == null)
+                        return NotFound(new { message = "Task not found" });
+                    task = taskEntity;
+                }
+                else
+                {
+                    task = taskService.GetById(id, userId);
+                }
+                
                 return Ok(task);
             }
             catch (Exception ex)
@@ -81,8 +98,19 @@ namespace API.Properties.Controllers
             try
             {
                 var userId = GetUserId();
+                var role = GetUserRole();
                 dto.Id = id;
-                taskService.Update(dto, userId);
+                
+                // Admin can update any task, regular users only their own
+                if (role == "Admin")
+                {
+                    taskService.UpdateAsAdmin(dto);
+                }
+                else
+                {
+                    taskService.Update(dto, userId);
+                }
+                
                 return Ok(new { message = "Task updated successfully" });
             }
             catch (Exception ex)
@@ -97,7 +125,18 @@ namespace API.Properties.Controllers
             try
             {
                 var userId = GetUserId();
-                taskService.Delete(id, userId);
+                var role = GetUserRole();
+                
+                // Admin can delete any task, regular users only their own
+                if (role == "Admin")
+                {
+                    taskService.DeleteAsAdmin(id);
+                }
+                else
+                {
+                    taskService.Delete(id, userId);
+                }
+                
                 return Ok(new { message = "Task deleted successfully" });
 
             }
@@ -128,6 +167,27 @@ namespace API.Properties.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        [Route("reassign/{id}")]
+        public IActionResult ReassignTask(int id, [FromBody] ReassignTaskDto dto)
+        {
+            try
+            {
+                taskService.ReassignTask(id, dto.NewUserId);
+                return Ok(new { message = "Task reassigned successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        public class ReassignTaskDto
+        {
+            public int NewUserId { get; set; }
         }
 
     }

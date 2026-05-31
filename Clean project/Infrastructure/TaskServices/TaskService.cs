@@ -45,6 +45,18 @@ namespace Infrastructure.TaskServices
             _context.SaveChanges();
         }
 
+        void ITaskService.DeleteAsAdmin(int id)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
+            if (task == null)
+                throw new Exception("Task not found.");
+            // Soft delete 
+            task.IsDeleted = true;
+            task.DeletedAt = DateTime.UtcNow;
+            task.DeletedBy = 0; // System/Admin delete
+            _context.SaveChanges();
+        }
+
         // for optional admin to permanently delete a task
         public void PermanentlyDelete(int id)
         {
@@ -59,18 +71,25 @@ namespace Infrastructure.TaskServices
 
         List<TaskResponseDto> ITaskService.GetAllByUserId(int userId)
         {
-            var tasks = _context.Tasks.Where(t => t.UserId == userId).ToList();
-            return tasks.Select(t => new TaskResponseDto
-            {
-                Id = t.Id,
-                Title = t.Title,
-                Description = t.Description,
-                Status = t.Status,
-                Priority = t.Priority,
-                DueDate = t.DueDate,
-                UserId = t.UserId,
-                 Category = t.Category,
-            }).ToList();
+            var tasks = _context.Tasks
+                .Where(t => t.UserId == userId)
+                .Join(_context.Users,
+                    task => task.UserId,
+                    user => user.Id,
+                    (task, user) => new TaskResponseDto
+                    {
+                        Id = task.Id,
+                        Title = task.Title,
+                        Description = task.Description,
+                        Status = task.Status,
+                        Priority = task.Priority,
+                        DueDate = task.DueDate,
+                        UserId = task.UserId,
+                        Username = user.Username,
+                        Category = task.Category,
+                    })
+                .ToList();
+            return tasks;
         }
 
 
@@ -78,37 +97,52 @@ namespace Infrastructure.TaskServices
 
         List<TaskResponseDto> ITaskService.GetAllTasks()
         {
-            var tasks = _context.Tasks.ToList();
-            return tasks.Select(t => new TaskResponseDto
-            {
-                Id = t.Id,
-                Title = t.Title,
-                Description = t.Description,
-                Status = t.Status,
-                Priority = t.Priority,
-                DueDate = t.DueDate,
-                UserId = t.UserId,
-                Category = t.Category,
-            }).ToList();
+            var tasks = _context.Tasks
+                .Join(_context.Users,
+                    task => task.UserId,
+                    user => user.Id,
+                    (task, user) => new TaskResponseDto
+                    {
+                        Id = task.Id,
+                        Title = task.Title,
+                        Description = task.Description,
+                        Status = task.Status,
+                        Priority = task.Priority,
+                        DueDate = task.DueDate,
+                        UserId = task.UserId,
+                        Username = user.Username,
+                        Category = task.Category,
+                    })
+                .ToList();
+            return tasks;
         }
 
 
         TaskResponseDto ITaskService.GetById(int id, int userId)
         {
-            var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == userId);
+            var task = _context.Tasks
+                .Where(t => t.Id == id && t.UserId == userId)
+                .Join(_context.Users,
+                    task => task.UserId,
+                    user => user.Id,
+                    (task, user) => new TaskResponseDto
+                    {
+                        Id = task.Id,
+                        Title = task.Title,
+                        Description = task.Description,
+                        Status = task.Status,
+                        Priority = task.Priority,
+                        DueDate = task.DueDate,
+                        UserId = task.UserId,
+                        Username = user.Username,
+                        Category = task.Category,
+                    })
+                .FirstOrDefault();
+
             if (task == null)
                 throw new Exception("Task not found or access denied.");
-            return new TaskResponseDto
-            {
-                Id = task.Id,
-                Title = task.Title,
-                Description = task.Description,
-                Status = task.Status,
-                Priority = task.Priority,
-                DueDate = task.DueDate,
-                UserId = task.UserId,
-                 Category = task.Category,
-            };
+
+            return task;
         }
 
         Dictionary<string, int> ITaskService.GetTaskCountByStatus(int? userId)
@@ -124,14 +158,43 @@ namespace Infrastructure.TaskServices
 
         void ITaskService.Update(UpdateTaskDto dto, int userId)
         {
-            var task=_context.Tasks.FirstOrDefault(_t => _t.Id == userId);
+            var task = _context.Tasks.FirstOrDefault(_t => _t.Id == dto.Id && _t.UserId == userId);
             if (task == null) throw new Exception("Task not found or access denied");
             task.Title = dto.Title;
             task.Description = dto.Description;
-            task.Priority= dto.Priority;
+            task.Status = dto.Status;
+            task.Priority = dto.Priority;
             task.DueDate = dto.DueDate;
-            task.Category= dto.Category;
+            task.Category = dto.Category;
 
+            _context.SaveChanges();
+        }
+
+        void ITaskService.UpdateAsAdmin(UpdateTaskDto dto)
+        {
+            var task = _context.Tasks.FirstOrDefault(_t => _t.Id == dto.Id);
+            if (task == null) throw new Exception("Task not found");
+            task.Title = dto.Title;
+            task.Description = dto.Description;
+            task.Status = dto.Status;
+            task.Priority = dto.Priority;
+            task.DueDate = dto.DueDate;
+            task.Category = dto.Category;
+
+            _context.SaveChanges();
+        }
+
+        void ITaskService.ReassignTask(int taskId, int newUserId)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == taskId);
+            if (task == null)
+                throw new Exception("Task not found");
+
+            var user = _context.Users.FirstOrDefault(u => u.Id == newUserId);
+            if (user == null)
+                throw new Exception("User not found");
+
+            task.UserId = newUserId;
             _context.SaveChanges();
         }
     }

@@ -21,11 +21,19 @@ namespace Infrastructure.UserServices
 
         public string Register(string username, string password)
         {
+
             var checkUser = _context.Users.IgnoreQueryFilters().FirstOrDefault(u => u.Username == username);
             
-            if (checkUser != null && checkUser.IsDeleted)
+            if (checkUser != null)
             {
-                throw new Exception("This username was previously used and cannot be registered again");
+                if (checkUser.IsDeleted)
+                {
+                    throw new Exception("This username was previously used and cannot be registered again");
+                }
+                else
+                {
+                    throw new Exception("Username already exists");
+                }
             }
             //Hash password using BCrypt
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
@@ -60,6 +68,19 @@ namespace Infrastructure.UserServices
 
             return GenerateToken(user);
         }
+
+        public List<UserDto> GetAllUsers()
+        {
+            return _context.Users
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Role = u.Role
+                })
+                .ToList();
+        }
+
         private string GenerateToken(User user)
         {
             var claims = new[]

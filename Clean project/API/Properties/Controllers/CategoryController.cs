@@ -113,7 +113,7 @@ namespace API.Controllers
             }
         }
         /// Get all active categories (All authenticated users)
-        [AllowAnonymous] // Or just [Authorize] without role restriction
+        [Authorize] // All authenticated users can access
         [HttpGet]
         [Route("list")]
         public IActionResult GetCategoriesList()
