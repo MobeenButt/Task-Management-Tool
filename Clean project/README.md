@@ -531,16 +531,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-## 📈 Project Stats
-
-- **Lines of Code**: ~5,000+
-- **Test Coverage**: 100% (50/50 tests passing)
-- **Build Time**: ~30 seconds
-- **Startup Time**: ~5 seconds
-- **Response Time**: <100ms average
-
----
-
 **🎉 Happy Task Managing! 🎉**
 
 *If you found this project helpful, please consider giving it a star ⭐*
